@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 function TodoList(tasksList) {
   const { tasks } = tasksList;
-  console.log('todolist',tasks);
+  console.log('todolist', tasksList.tasks);
     return ( 
       <div>
         <h1>

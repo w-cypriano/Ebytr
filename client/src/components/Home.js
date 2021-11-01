@@ -5,18 +5,26 @@ import TodoList from './TodoList';
 function Home() {
   const [taskValue, setTaskValue ] = useState('');
   const [statusValue, setStatusValue] = useState('Pendente');
-  const [tasks, setTasks] = useState('');
-  console.log('home task', taskValue);
-  console.log('home', statusValue);
-  /* useEffect(() => {
-    const allTasks = getAllTask()
-    setTasks(allTasks);
-  }); */
+  const [tasksList, setTasksList] = useState('');
+  console.log('home',tasksList);
+
+  const fetchApi = async () => {
+    try {
+      const request = await getAllTask();
+      setTasksList(request.tasks);
+    } catch (e) {
+      console.log('Algo deu errado');
+    }
+  }
+
+  useEffect(() => {
+    fetchApi();
+  }, []);
 
   const handleSubmit = async () => {
     const result = await createTask(taskValue, statusValue)
     console.log(result);
-    setTasks(result);
+    setTasksList(result);
   }
 
   return (
@@ -37,7 +45,7 @@ function Home() {
         </select>
       </form>
       <button type="submit" onClick={handleSubmit}>Cadastrar</button>
-      <TodoList tasksList={tasks}/>
+      <TodoList tasksList={tasksList}/>
     </div>
   )
 }
