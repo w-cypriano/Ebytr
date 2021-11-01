@@ -16,4 +16,12 @@ const taskValidate = (req, res, next) => {
         next();
   };
 
-  module.exports = { taskValidate, statusValidate }
+  const statusValidateExist = (req, res, next) => {
+    const { status } = req.body;
+    if (!status || status === '') {
+      return res.status(badRequest).json({ message: '"Status" is required' });
+    }
+        next();
+  };
+
+  module.exports = { taskValidate, statusValidate, statusValidateExist }

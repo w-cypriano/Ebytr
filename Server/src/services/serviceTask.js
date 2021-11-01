@@ -11,18 +11,35 @@ const createTask = async (task, status) => {
 };
 
 const getAllTask = async () => {
-const tasks = model.getAllTask();
-  if (!tasks) {
+const allTasks = model.getAllTask();
+  if (!allTasks) {
     return {
       err: { message: 'Tasks not found'},
     };
   }
-  return tasks
+  return allTasks
 };
 
-const taskDelete = async (id) => {
-  const deletedProduct = await model.taskDelete(id);
-  return deletedProduct;
+const updateTask = async (id, task, status) => {
+  const existingId = await model.getTaskById(id);
+    if (!existingId) {
+      return {
+        err: { message: 'Id not found' },
+      };
+    }   
+  const updatedTask = await model.updateTask(id, task, status);
+  return updatedTask;
 };
 
-module.exports = { createTask, taskDelete, getAllTask };  
+const deleteTask = async (id) => {
+  const existingId = await model.getTaskById(id);
+    if (!existingId) {
+      return {
+        err: { message: 'Id not found' },
+      };
+    }  
+  const newTaskList = await model.deleteTask(id);
+  return newTaskList;
+};
+
+module.exports = { createTask, deleteTask, getAllTask, updateTask };  

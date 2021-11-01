@@ -27,13 +27,23 @@ const getAllTask = rescue(async (req, res) => {
   res.status(200).json(allTasks);
 });
 
-const taskDelete = rescue(async (req, res) => {
+const updateTask = rescue(async (req, res) => {
   const { id } = req.params;
-  const deletedProduct = await service.taskDelete(id);
-  if (deletedProduct.err) {
-    return res.status(422).json(deletedProduct);
+  const { task, status } = req.body;
+  const updatedTask = await service.updateTask(id, task, status);
+  if (updatedTask.err) {
+    return res.status(422).json(updatedTask.err);
   }
-  res.status(200).json(deletedProduct);
+  res.status(200).json(updatedTask) ;
 });
 
-module.exports = { createTask, getAllTask };
+const deleteTask = rescue(async (req, res) => {
+  const { id } = req.params;
+  const newTaskList = await service.deleteTask(id);
+  if (newTaskList.err) {
+    return res.status(422).json(newTaskList);
+  }
+  res.status(200).json(newTaskList);
+});
+
+module.exports = { createTask, getAllTask, deleteTask, updateTask };
