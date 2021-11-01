@@ -11,9 +11,38 @@ const createTask = async (task, status) => {
 const findByTask = async (task) => {
   const db = await getConnection();
   const searchTask = await db.collection('tasks').findOne({ task });
+
   if (!searchTask) return null;
   return searchTask; 
 }
+const getAllTask = async () => {
+  const db = await getConnection(); 
+  const tasksList = await db.collection('tasks').find({}).toArray();
+  const tasksAll = { tasks: [...tasksList] };
+  return tasksAll;
+};
+
+const getById = async (id) => {
+  const idSize = 24;
+  if (id.length < idSize) return null;
+  const db = await getConnection(); 
+  const productsId = await db.collection('products').findOne({ _id: ObjectId(id) });
+  if (!productsId) return null;
+  return productsId;
+};
+
+const productUpdate = async (id, name, quantity) => {
+  const db = await getConnection(); 
+  const updatedProduct = await db.collection('products').findOneAndUpdate(
+    { _id: ObjectId(id) }, 
+    { $set: 
+      { name, quantity },
+    },
+    { returnDocument: 'after' },
+  );
+  return updatedProduct.value;
+};
+
 const taskDelete = async (id) => {
   const db = await getConnection();
   const isDelete = await db.collection('tasks').findOne({ _id: ObjectId(id) });
@@ -25,4 +54,4 @@ const taskDelete = async (id) => {
   }
 };
 
-module.exports = { createTask,  findByTask, taskDelete };
+module.exports = { createTask,  findByTask, taskDelete, getAllTask };

@@ -19,33 +19,13 @@ const createTask = rescue(async (req, res) => {
   return res.status(201).json(createdTask);
 });
 
-const getAll = async () => {
-  const db = await getConnection(); 
-  const productsList = await db.collection('products').find({}).toArray();
-  const productsAll = { products: [...productsList] };
-  return productsAll;
-};
-
-const getById = async (id) => {
-  const idSize = 24;
-  if (id.length < idSize) return null;
-  const db = await getConnection(); 
-  const productsId = await db.collection('products').findOne({ _id: ObjectId(id) });
-  if (!productsId) return null;
-  return productsId;
-};
-const productUpdate = async (id, name, quantity) => {
-  const db = await getConnection(); 
-  const updatedProduct = await db.collection('products').findOneAndUpdate(
-    { _id: ObjectId(id) }, 
-    { $set: 
-      { name, quantity },
-    },
-    { returnDocument: 'after' },
-  );
-  return updatedProduct.value;
-};
-
+const getAllTask = rescue(async (req, res) => {
+  const allTasks = await service.getAllTask();
+  if (allTasks.err) {
+    return res.status(409).json(allTasks.err);
+  }
+  res.status(200).json(allTasks);
+});
 
 const taskDelete = rescue(async (req, res) => {
   const { id } = req.params;
@@ -56,4 +36,4 @@ const taskDelete = rescue(async (req, res) => {
   res.status(200).json(deletedProduct);
 });
 
-module.exports = { createTask };
+module.exports = { createTask, getAllTask };

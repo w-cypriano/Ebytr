@@ -7,6 +7,9 @@ const PORT = 3000;
 const app = express();
 app.use(bodyParser.json())
 
-    app.post('/task', [taskValidate, statusValidate, controllerTask.createTask]);
+app.post('/task', [taskValidate, statusValidate, controllerTask.createTask]);
+app.get('/', controllerTask.getAllTask);
+
+
 
 app.listen(PORT, () => console.log(`conectado na porta ${PORT}`));
