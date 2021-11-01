@@ -1,9 +1,19 @@
 export async function createTask(task, status ) {
-    const result = (await
-    fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`))
-      .json();
-    return result;
+    const url = 'http://localhost:3001/task'
+    const result = await
+    fetch(url, {
+        "method": "POST",
+        "headers": {
+            "Content-Type": 'application/json'
+        },
+        "body": JSON.stringify({
+            task,
+            status
+        })
+    })
+    return result.json();
   }
+
 
   export async function getAllTask () {
     const url = 'http://localhost:3001'
