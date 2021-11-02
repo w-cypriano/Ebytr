@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
-function TodoList(tasksList) {
-  const { tasks } = tasksList;
-  console.log('todolist', tasksList.tasks);
+function TodoList(tasks) {
+  console.log(tasks)
+ const { task, status } = tasks
+  console.log('todo',task);
     return ( 
       <div>
-        <h1>
-          {/*tasks.map((task) => {
-          task.task 
-          task.status
-        })*/}
-        </h1>
+        <p>{task.task} - {task.status}</p><button>editar</button><button>excluir</button>
       </div>
     );
 }
