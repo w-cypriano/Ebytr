@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-
+import { deleteTask } from '../services/api';
 function TodoList(tasks) {
-  console.log(tasks)
- const { task, status } = tasks
-  console.log('todo',task);
+
+const removeItem = async (id) => {
+  const request = await deleteTask(id)
+}
+
+ const { _id, task, status } = tasks
     return ( 
       <div>
-        <p>{task.task} - {task.status}</p><button>editar</button><button>excluir</button>
+        <p>{task.task} - {task.status}
+        </p><button>editar</button>
+        <button onClick={() => removeItem(task._id)}>excluir</button>
       </div>
     );
 }
