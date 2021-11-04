@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext  } from 'react';
+import MyContext from '../contexts/myContext'
 import { getAllTask, createTask } from '../services/api';
-import TodoList from './TodoList';
+
 
 function Home() {
   const [taskValue, setTaskValue ] = useState('');
   const [statusValue, setStatusValue] = useState('Pendente');
-  const [tasksList, setTasksList] = useState([]);  
+  const { tasksList, setTasksList, refreshList } = useContext(MyContext);
   console.log('home', tasksList);
+  console.log('home ref', refreshList);
+
   const fetchApi = async () => {
     try {
       const request = await getAllTask();
-      setTasksList([...[], ...request.tasks]);
+      const result = request.tasks;
+      console.log('fethc', request.tasks)
+      setTasksList([...result]);
     } catch (e) {
       console.log('Algo deu errado');
     }
@@ -22,8 +27,9 @@ function Home() {
 
   const handleSubmit = async () => {
     const request = await createTask(taskValue, statusValue)
-    console.log(request.tasks);
-    setTasksList([...[], ...request.tasks]);
+    const result = request.tasks;
+    setTasksList([...result]);
+    setTaskValue(' ');
   }
   
   return (
@@ -44,7 +50,6 @@ function Home() {
         </select>
       </form>
       <button type="submit" onClick={handleSubmit}>Cadastrar</button>
-      {tasksList.map((task) => <TodoList key={task._id} task={task} /> )}
     </div>
   )
 }

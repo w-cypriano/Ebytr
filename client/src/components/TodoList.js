@@ -1,18 +1,34 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
+import MyContext from '../contexts/myContext'
 import { deleteTask } from '../services/api';
-function TodoList(tasks) {
 
-const removeItem = async (id) => {
-  const request = await deleteTask(id)
-}
+function TodoList() {
+  const { tasksList, setTasksList} = useContext(MyContext);
+  
+  const removeTask = async (id) => {
+    const request = await deleteTask(id);
+    const result = request.tasks;
+    setTasksList([...result]);
+  }
 
- const { _id, task, status } = tasks
-    return ( 
+  const editTask = async (id) => {
+    const request = await updateTask(id);
+    const result = request.tasks;
+    setTasksList([...result]);
+  }
+  const allTask = tasksList.map((task) =>
+    <li key={task._id}>
+      {task.task} -  {task.status}
       <div>
-        <p>{task.task} - {task.status}
-        </p><button>editar</button>
-        <button onClick={() => removeItem(task._id)}>excluir</button>
+        <button onClick={() => editTask(task._id)}>editar</button>
+        <button onClick={() => removeTask(task._id)}>excluir</button>
       </div>
+    </li>
+  );
+    return ( 
+      <ul>
+        {allTask}
+    </ul>
     );
 }
  
