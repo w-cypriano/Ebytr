@@ -1,4 +1,4 @@
-Este é um projeto que chamo de  todo list fullstack, pois se faz uso de stacks
+Este é um projeto que chamo de  todo list fullstack, pois faz uso de stacks
 de front-End e Back-End.
 
 Stacks ultilizadas: Stack MERN ( Mongodb, Express React, Nodejs).
@@ -10,7 +10,7 @@ A pasta Ebytr contém:<br>
  -client:aplicação front-end <br>
  -server: aplicação back-end 
 
-Para rodar o projeto:
+Para rodar o projeto:<br>
 1- faço o clone do projeto na seguinte url: https://github.com/w-cypriano/Ebytr.git <br>
 2- acessa a pasta: Ebytr<br>
 3- instale a dependencias do projeto:<br>
