@@ -1,12 +1,12 @@
 Este é um projeto que chamo de  todo list fullstack, pois se faz uso de stacks
-de front-End e Back-End.<p>
+de front-End e Back-End.
 
 Stacks ultilizadas: Stack MERN ( Mongodb, Express React, Nodejs).
 
 Objetivo: Desenvolver um CRUD de uma lista de tarefas.
 
 Estrutura do projeto:
-A pasta Ebytr contém:
+A pasta Ebytr contém:<br>
  -client:aplicação front-end
  -server: aplicação back-end
 
