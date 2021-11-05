@@ -1,5 +1,5 @@
 Este é um projeto que chamo de  todo list fullstack, pois se faz uso de stacks
-de front-End e Back-End.
+de front-End e Back-End.<p>
 
 Stacks ultilizadas: Stack MERN ( Mongodb, Express React, Nodejs).
 
