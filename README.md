@@ -5,12 +5,12 @@ Stacks ultilizadas: Stack MERN ( Mongodb, Express React, Nodejs).
 
 Objetivo: Desenvolver um CRUD de uma lista de tarefas.
 
-<strong> Estrutura do projeto:</strong>
+<strong> Estrutura do projeto:</strong> <br>
 A pasta Ebytr contém:<br>
  -client:aplicação front-end <br>
  -server: aplicação back-end 
 
-Para rodar o projeto:<br>
+<strong> Para rodar o projeto:</strong> <br>
 1- faço o clone do projeto na seguinte url: https://github.com/w-cypriano/Ebytr.git <br>
 2- acessa a pasta: Ebytr<br>
 3- instale a dependencias do projeto:<br>
